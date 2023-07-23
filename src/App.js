@@ -1,23 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App =() =>{
+
+  // directional array so that code won't get repeated
+
+
+  const categories = [
+    { 
+      id: 1,
+      title: 'Hats',
+    },
+
+    { 
+      id: 2,
+      title: 'Jackets',
+    },
+
+    { 
+      id: 3,
+      title: 'Sneakers',
+    },
+
+    { 
+      id: 4,
+      title: 'Women',
+    },
+
+    { 
+      id: 5,
+      title: 'Men',
+    },
+  ]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="categories-container">
+      {categories.map(({title}) =>(
+                <div className = "category-container">
+                  <div className = 'background-image'/>
+                    <div className = 'category-body-container'>
+                      <h2>{title}</h2>
+                      <p>Shop now</p>
+                      
+                    </div>
+      
+              </div>
+
+      ))}
+
+
     </div>
   );
 }
