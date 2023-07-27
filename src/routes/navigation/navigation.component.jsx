@@ -9,7 +9,7 @@ const Navigation = () => {
       <div className='navigation'>
         <Link className="logo-container" to='/'>
           <div>
-            <CrwnLogo className="logo" /> {/* Fixed 'clasName' to 'className' */}
+            <CrwnLogo className="logo" /> 
           </div>
         </Link>
         <div className='link-container'>
@@ -17,7 +17,7 @@ const Navigation = () => {
             Shop
           </Link>
 
-          <Link className='nav-link' to='/sign-in'>
+          <Link className='nav-link' to='/auth'>
             Sign In
           </Link>
         </div>
