@@ -6,9 +6,11 @@ import SignUpForm from '../../component/sign-up form/sign-up-form.component';
 import SignInForm from '../../component/sign-in-form/sign-in-form.component';
 
 const SignIn = () =>{
+  //create function that will check the data in the database
     useEffect(() => {
         const getRedirectResultAsync = async () => {
           const response = await getRedirectResult(auth);
+
           if(response){
             const userDocRef = await createUserDocumentFromAuth(response.user)
           }
@@ -17,7 +19,7 @@ const SignIn = () =>{
         getRedirectResultAsync();
       }, []);
 
-
+// create user through google pop up
     const logGoogleUser = async () =>{
         const {user} = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user);

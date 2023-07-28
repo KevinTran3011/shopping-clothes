@@ -4,7 +4,6 @@ import Button from "../button/button.component";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.util";
 
 import FormInput from "../form-input/form-input.component";
-import { UserContext } from "../context/user.context";
 import './sign-up-form.style.scss'
 
 const defaultFormField = {
@@ -19,13 +18,12 @@ const SignUpForm = () =>{
     const [ formFields, setFormFields] = useState(defaultFormField);
     const {displayName, email,password, confirmPassword} = formFields;
     
-    const {setCurrentUser} = useContext(UserContext);
 
     const resetFormField = () => {
         setFormFields(defaultFormField);
       };
       
-
+        // check the input to se if it's valid
     const handleSubmit = async(event) =>{
         event.preventDefault(defaultFormField);
 
@@ -35,7 +33,6 @@ const SignUpForm = () =>{
             try {
               const {user} = await createAuthUserWithEmailAndPassword(email, password);
 
-              setCurrentUser(user);
 
               await createUserDocumentFromAuth(user, {displayName});
               resetFormField()
