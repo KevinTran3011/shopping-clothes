@@ -1,0 +1,34 @@
+.cart-item-container {
+    display: flex;
+    align-items: center;
+    height: 120px; /* Increased height for a larger cart item */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+  
+    img {
+      width: 60%; /* Increased width to make the image larger */
+      height: 100%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  
+    .item-details {
+      width: 40%; /* Decreased width to make more space for the image */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px;
+  
+      .name {
+        font-size: 16px;
+        font-weight: bold;
+      }
+  
+      .price {
+        font-size: 14px;
+        color: #888;
+      }
+    }
+  }
+  
