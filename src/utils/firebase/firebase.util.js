@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider,
-createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'; //getting/setting document data
+createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged
+} from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs} from 'firebase/firestore'; //getting/setting document data
 
 const firebaseConfig = {
     apiKey: "AIzaSyDJfOCCIWN60FvWtgLG2i8ED6f6HgHWno0",
@@ -31,6 +32,43 @@ const firebaseConfig = {
   //get user profile and check if it's in the database
 
   export const db = getFirestore();
+
+
+  //update categories from the js file to their respective places 
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd)=>{
+    //create a collection ref
+    const collectionRef = collection(db, collectionKey);
+    // put object inside collectionRef as documents
+    //make sure that the documents added are successfully added
+    const batch = writeBatch(db);
+    //attach functions for files to the batch that will make sure that the batch will get launched only when writeBatch is successful
+    objectsToAdd.forEach((object)=>{
+      //create new documents reference for each object based on titles
+      const docRef = doc(collectionRef, object.title.toLowerCase());
+      batch.set(docRef, object);
+    });
+    await batch.commit();
+    console.log('transaction successful');
+
+
+
+  }
+
+  export const getCategoriesAndDocuments = async()=>{
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap =   querySnapshot.docs.reduce((acc, docSnapshot)=>{
+      const { title, items} = docSnapshot.data();
+      acc[title.toLowerCase()] = items;
+
+      return acc;
+
+    },{})
+
+    return categoryMap;
+  }
 
 
 

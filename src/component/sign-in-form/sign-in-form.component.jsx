@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.util";
 import FormInput from "../form-input/form-input.component";
@@ -74,7 +74,7 @@ const SignInForm = () =>{
 
                 <div className = 'buttonContainer'>
                     <Button  type = 'submit'>Sign In</Button>
-                    <Button type = 'button' buttonType='google'  onClick = {signInWithGoogle}>Google Sign In</Button> 
+                    <Button type = 'button' buttonType={BUTTON_TYPE_CLASSES.google}  onClick = {signInWithGoogle}>Google Sign In</Button> 
                      {/* type = 'button' has to be included to prevent sending the login, triggering the error */}
 
 

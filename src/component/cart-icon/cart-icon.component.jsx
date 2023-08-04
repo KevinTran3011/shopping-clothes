@@ -3,17 +3,18 @@ import { useContext } from 'react';
 import { CartContext } from '../context/cart.context';
 
 
-import './cart-icon.styles.scss';
+
+import {CartIcons, CartIconContainer, ItemCount} from'./cart-icon.styles.jsx';
 
 const CartIcon =()=>{
     const { isCartOpen, setIsCartOpen, cartCount} = useContext(CartContext);
     const toggleIsCartOpen =() => setIsCartOpen(!isCartOpen); 
     //set it so that it will only returns when isCartOpen = false
     return(
-        <div className='cart-icon-container' onClick={toggleIsCartOpen}>
-            <ShoppingIcon className='shopping-icon'/>
-            <span className='item-count'>{cartCount}</span>
-        </div>
+        <CartIconContainer onClick={toggleIsCartOpen}>
+            <CartIcons className='shopping-icon'/>
+            <ItemCount className='item-count'>{cartCount}</ItemCount>
+        </CartIconContainer>
     )
 
 }

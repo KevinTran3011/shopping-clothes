@@ -5,7 +5,7 @@ import { UserProvider } from './component/context/user.context';
 import { BrowserRouter } from 'react-router-dom';
 import 'tachyons';
 import App from './App';
-import { ProductProvider } from './component/context/product.context';
+import { CategoriesProvider } from './component/context/categories.context';
 import { CartProvider } from './component/context/cart.context';
 import reportWebVitals from './reportWebVitals';
 
@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductProvider> 
+        <CategoriesProvider> 
           {/* Product provider placed inside user provider so that products can access user's information */}
           <CartProvider>
 
@@ -26,7 +26,7 @@ root.render(
 
 
 
-        </ProductProvider>
+        </CategoriesProvider>
 
 
       </UserProvider>
