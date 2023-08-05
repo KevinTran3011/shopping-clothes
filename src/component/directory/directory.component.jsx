@@ -30,7 +30,7 @@ const Directory = () =>{
       "id": 4,
       "title": "Women",
       "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png",
-      route: 'shop/women',
+      route: 'shop/womens',
   
     },
     {
