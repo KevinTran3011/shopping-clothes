@@ -4,8 +4,6 @@
     column-gap: 10px;
     row-gap: 50px;
   
-    @media screen and (max-width: 768px) { // Adjust max-width for mobile screens
-      grid-template-columns: repeat(2, 1fr); // Display two items per row on mobile
-    }
+
   }
   
