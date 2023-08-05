@@ -1,7 +1,16 @@
-.authentication-container{
+// authentication.style.scss
+
+.authentication-container {
     display: flex;
+    flex-direction: column; // Change to column for mobile devices
+    align-items: center;    // Center items horizontally
     width: 900px;
     justify-content: space-between;
     margin: 30px auto;
-
-}
+  
+    @media screen and (max-width: 768px) { // Adjust max-width for mobile screens
+      width: 100%; // Take full width on mobile
+      padding: 0 20px; // Add some horizontal padding for better spacing
+    }
+  }
+  
