@@ -1,40 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.scss';
-import { UserProvider } from './component/context/user.context';
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import 'tachyons';
 import App from './App';
-import { CategoriesProvider } from './component/context/categories.context';
-import { CartProvider } from './component/context/cart.context';
 import reportWebVitals from './reportWebVitals';
+import  store, { persistor} from './component/store/store.js';
+import { PersistGate } from 'redux-persist/integration/react';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <CategoriesProvider> 
-          {/* Product provider placed inside user provider so that products can access user's information */}
-          <CartProvider>
+    <Provider store={store}>
+      <PersistGate loading = {null} persistor = {persistor}>
 
-          <App />
-
-
-
-          </CartProvider>
+        <BrowserRouter>
+            {/* Product provider placed inside user provider so that products can access user's information */}
+              <App />
+        </BrowserRouter>
 
 
+      </PersistGate>
 
-        </CategoriesProvider>
-
-
-      </UserProvider>
-  </BrowserRouter>
-  </React.StrictMode>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

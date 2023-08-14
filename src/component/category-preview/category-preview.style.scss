@@ -7,6 +7,10 @@
     font-size: 28px;
     margin-bottom: 25px;
     cursor: pointer;
+  
+      text-decoration: none;
+      color: black;
+    
   }
 
   .preview {
@@ -18,4 +22,6 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+
+
 }
