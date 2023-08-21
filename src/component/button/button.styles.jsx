@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SpinnerContainer } from '../spinner/spinner.styles';
 
 export const BasedButton = styled.button`
   /* Common styles for all screen sizes */
@@ -18,6 +19,7 @@ export const BasedButton = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: white;
@@ -55,3 +57,9 @@ export const InvertedButton = styled(BasedButton)`
     border: none;
   }
 `;
+
+export const ButtonSpinner = styled(SpinnerContainer)`
+width: 20px,
+height: 20px,
+`
+

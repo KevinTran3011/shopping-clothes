@@ -3,17 +3,22 @@ import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 // import { CartContext } from "../../component/context/cart.context";
 import { selectIsCartOpen } from "../../component/store/cart/cart.selector";
-import { signOutUser } from "../../utils/firebase/firebase.util";
+// import { signOutUser } from "../../utils/firebase/firebase.util";
 import CartIcon from "../../component/cart-icon/cart-icon.component";
 import CartDropdown from "../../component/cart-dropdown/cart-dropdown.component";
 import  {NavigationContainer, LogoContainer, NavLink, NavLinkContainer} from './navigation.styles.jsx';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../component/store/user/user.selector";
+import { signOutStart } from "../../component/store/user/user.action";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   // const { isCartOpen } = useContext(CartContext);
   const isCartOpen = useSelector(selectIsCartOpen);
+  console.log('Navigation component rendered');
+  console.log('currentUser:', currentUser);
+
 
   const handleSignOut = async () => {
     try {
@@ -23,6 +28,8 @@ const Navigation = () => {
       console.error('Error signing out:', error.message);
     }
   };
+
+  const signOutUser =()=>dispatch(signOutStart())
 
   return (
     <Fragment>

@@ -65,44 +65,40 @@ const firebaseConfig = {
   }
 
 
-
-  export const createUserDocumentFromAuth = async (userAuth, additionalInformation ={displayName : '??????'}) =>{
-    if(!userAuth) return;
+  export const createUserDocumentFromAuth = async (
+    userAuth,
+    additionalInformation = {}
+  ) => {
+    if (!userAuth) return;
+  
     const userDocRef = doc(db, 'users', userAuth.uid);
-
-    console.log(userDocRef);
-
-    //take user data from database and check if it exists in the database
+  
     const userSnapshot = await getDoc(userDocRef);
-    console.log(userSnapshot)
-    
-
-        //if user data doesn't exist, create user data from userAuth in collection
-
-    if(!userSnapshot.exists()) {
-        const {displayName, email} = userAuth;
-        const createdAt = new Date();
-        
-        try{
-          await setDoc(userDocRef, {displayName, email, createdAt, ...additionalInformation}) //create user profile in database
-        } catch(error){
-          console.log(error.message);
-        }
-
+  
+    if (!userSnapshot.exists()) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+  
+      try {
+        await setDoc(userDocRef, {
+          displayName,
+          email,
+          createdAt,
+          ...additionalInformation,
+        });
+      } catch (error) {
+        console.log('error creating the user', error.message);
+      }
     }
-
-
-    //if data exists return userDocRef
-    return userDocRef;
-  }
-
-
-  export const createAuthUserWithEmailAndPassword = async (email, password) =>{
-    if(!email || !password) return;
-    return await createUserWithEmailAndPassword(auth, email, password)
-
-  }
-
+  
+    return userSnapshot;
+  };
+  
+  export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+  
+    return await createUserWithEmailAndPassword(auth, email, password);
+  };
   export const signInAuthUserWithEmailAndPassword = async (email, password) =>{
     if(!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password)
@@ -117,3 +113,19 @@ const firebaseConfig = {
   export const onAuthStateChangedListener = (callback) =>{
     onAuthStateChanged(auth, callback);
   } 
+
+
+export const getCurrentUser = () =>{
+  return new Promise( (resolve, reject)=>{
+    const unsubscribe = onAuthStateChanged(
+      auth, 
+      (userAuth) =>{
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+
+    );
+
+  });
+}

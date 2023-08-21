@@ -7,6 +7,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import  store, { persistor} from './component/store/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './utils/stripe/stripe.utils';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +17,12 @@ ReactDOM.render(
 
         <BrowserRouter>
             {/* Product provider placed inside user provider so that products can access user's information */}
+            <Elements stripe = {stripePromise}>
+
               <App />
+
+
+            </Elements>
         </BrowserRouter>
 
 

@@ -5,17 +5,23 @@ import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { rootReducer } from './root-reducer';
+import createSagaMiddleware from 'redux-saga';
+
+import { rootSaga } from './root-saga';
 
 
 
 const persistConfig = {
-  key: 'root',
+  key: 'root', // This key is used to store the data in localStorage
   storage,
-  blacklist: ['user'],
-}
+  whitelist: ['cart'], // Add the reducers that need to be persisted here
+};
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== 'production' && logger, sagaMiddleware].filter(Boolean);
 
 
 
@@ -31,5 +37,7 @@ const store = configureStore({
 });
 
 export default store;
+
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store)
